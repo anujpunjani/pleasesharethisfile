@@ -24,6 +24,11 @@ app.use("/api/files", require("./routes/files"));
 app.use("/files", require("./routes/show"));
 app.use("/files/download", require("./routes/download"));
 
+// Root
+app.get("/", (request, response) => {
+	response.sendFile(__dirname + "/index.html");
+});
+
 app.listen(process.env.PORT || 3000, () => {
 	console.log("Listening on PORT", process.env.PORT || 3000);
 });
