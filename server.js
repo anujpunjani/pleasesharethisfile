@@ -7,7 +7,6 @@ const connectDB = require("./config/db");
 connectDB();
 
 // Cors
-
 const corsOptions = {
 	origin: process.env.ALLOWED_CLIENTS.split(","),
 };
@@ -15,6 +14,7 @@ app.use(cors(corsOptions));
 
 app.use(express.static("public"));
 app.use(express.json());
+
 // Template engine
 app.set("views", path.join(__dirname, "/views"));
 app.set("view engine", "ejs");
