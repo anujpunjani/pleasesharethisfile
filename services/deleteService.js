@@ -1,7 +1,7 @@
-const File = require("./models/File");
+const File = require("../models/File");
 const fs = require("fs");
-const connectDB = require("./config/db");
-connectDB();
+const connectDB = require("../config/db");
+const schedule = require("node-schedule");
 
 async function deleteData() {
 	// 24 hours Files
@@ -22,4 +22,12 @@ async function deleteData() {
 	}
 }
 
-deleteData().then(process.exit);
+const deleteFiles = () => {
+	schedule.scheduleJob("0 0 * * *", () => {
+		console.log("Staring to delete files");
+		connectDB();
+		deleteData().then(process.exit);
+	});
+};
+
+module.exports = deleteFiles;
